@@ -119,13 +119,11 @@ describe('Функция getGroups(array)', function () {
         var generator4 = getGroups([1, 2, 3, 4, 5, 6, 7, 9]);
         var generator5 = getGroups([1, 2, 3, 4, 5, 6, 7]);
 
-        var generatorAns = [[1, 2, 3, 4, 5], [4, 5, 6, 7]];
-
-        // assert.equal(generator, generatorAns);
-        // assert.equal(generator2, [[1, 2], [4, 5], [4, 5], [8, 9]]);
-        // assert.equal(generator3, []);
-        // assert.equal(generator4, [1, 2, 3, 4, 5, 6, 7]);
-        // assert.equal(generator5, [1, 2, 3, 4, 5, 6, 7]);
+        assert.deepEqual(generator, [[1, 2, 3, 4, 5], [4, 5, 6, 7]]);
+        assert.deepEqual(generator2, [[1, 2], [4, 5], [4, 5], [8, 9]]);
+        assert.deepEqual(generator3, []);
+        assert.deepEqual(generator4, [1, 2, 3, 4, 5, 6, 7]);
+        assert.deepEqual(generator5, [1, 2, 3, 4, 5, 6, 7]);
     });
 });
 
@@ -191,9 +189,16 @@ describe('Функция checkUrl(url)', function () {
         assert.isUndefined(generator(url2));
     });
 
-    // it("Функция генерирует исключение со списком не валидных доменов", () => {
-    // 	assert.throws(generator("www.domain.lu"));
-    // 	assert.throws(generator(["www.domain.ru1", "www.domain.ru", "www.domain.ru"]));
-    // 	assert.throws(generator(["www.domain.ru2", "www.domain.ru3", "www.domain.ru"]));
-    // });
+    it("Функция генерирует исключение со списком не валидных доменов", function () {
+
+        assert.throws(function () {
+            generator("www.domain.lu");
+        }, Error, 'Неправильный формат данных: www.domain.lu');
+        assert.throws(function () {
+            generator(["www.domain.ru1", "www.domain.ru", "www.domain.ru"]);
+        }, Error, 'Неправильный формат данных: www.domain.ru1');
+        assert.throws(function () {
+            generator(["www.domain.ru2", "www.domain.ru3", "www.domain.ru"]);
+        }, Error, 'Неправильный формат данных: www.domain.ru2,www.domain.ru3');
+    });
 });

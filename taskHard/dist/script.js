@@ -121,3 +121,4 @@ var checkUrl = function checkUrl(url) {
 
   if (arrNoValid.length !== 0) throw new Error("Неправильный формат данных: " + arrNoValid);
 };
+// console.log(checkUrl("www.domain.lu"));
